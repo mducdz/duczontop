@@ -121,22 +121,9 @@ Tabs.Main0:AddButton({
 
 -- Tab 1: Script Main
 Tabs.Main1:AddButton({
-    Title="Redz Hub",
-    Callback=function()
-        local Settings={JoinTeam="Pirates",Translator=true}
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/newredz/BloxFruits/refs/heads/main/Source.luau"))(Settings)
-    end
-})
-Tabs.Main1:AddButton({
     Title="w-azure Hub",
     Callback=function()
         loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/85e904ae1ff30824c1aa007fc7324f8f.lua"))()
-    end
-})
-Tabs.Main1:AddButton({
-    Title="Fix Lag",
-    Callback=function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/TurboLite/Script/main/FixLag.lua"))()
     end
 })
 Tabs.Main1:AddButton({
@@ -149,12 +136,6 @@ Tabs.Main1:AddButton({
     Title="Speed Hub X",
     Callback=function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua", true))()
-    end
-})
-Tabs.Main1:AddButton({
-    Title="Than Hub",
-    Callback=function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/thantzy/thanhub/refs/heads/main/thanv1"))()
     end
 })
 Tabs.Main1:AddButton({
