@@ -4,31 +4,35 @@ local player = Players.LocalPlayer
 
 -- 🌌 INTRO GUI
 local gui = Instance.new("ScreenGui")
-gui.Name = "GraiIntro"
+gui.Name = "DUCZIntro"
 gui.IgnoreGuiInset = true
 gui.ResetOnSpawn = false
 gui.Parent = player:WaitForChild("PlayerGui")
 
+-- Nền
 local bg = Instance.new("Frame")
 bg.Size = UDim2.new(1,0,1,0)
 bg.BackgroundColor3 = Color3.fromRGB(0,0,0)
-bg.BackgroundTransparency = 0.3
+bg.BackgroundTransparency = 0.2 -- giảm trong suốt 1 chút
 bg.Parent = gui
 
+-- Logo
 local logo = Instance.new("ImageLabel")
 logo.Parent = gui
 logo.AnchorPoint = Vector2.new(0.5,0.5)
 logo.Position = UDim2.new(0.5,0,0.5,0)
-logo.Size = UDim2.new(0,0,0,0)
+logo.Size = UDim2.new(0,0,0,0) -- bắt đầu nhỏ
 logo.BackgroundTransparency = 1
 logo.Image = "http://www.roblox.com/asset/?id=77111304194141"
 logo.ImageTransparency = 1
 
+-- Zoom + fade in
 TweenService:Create(logo, TweenInfo.new(1.5, Enum.EasingStyle.Elastic, Enum.EasingDirection.Out), {
-    Size = UDim2.new(0,200,0,200),
+    Size = UDim2.new(0,400,0,400), -- tăng kích thước logo
     ImageTransparency = 0
 }):Play()
 
+-- Xoay logo
 task.spawn(function()
     while logo.Parent do
         logo.Rotation += 0.5
@@ -36,11 +40,12 @@ task.spawn(function()
     end
 end)
 
+-- Chữ dưới logo
 local msg = Instance.new("TextLabel")
 msg.Parent = gui
 msg.AnchorPoint = Vector2.new(0.5,0)
-msg.Position = UDim2.new(0.5,0,0.75,0)
-msg.Size = UDim2.new(0,600,0,80)
+msg.Position = UDim2.new(0.5,0,0.8,0)
+msg.Size = UDim2.new(0,800,0,100) -- chữ to hơn
 msg.BackgroundTransparency = 1
 msg.Text = "DUCZ Hub"
 msg.TextColor3 = Color3.fromRGB(0,255,255)
@@ -50,10 +55,13 @@ msg.TextStrokeTransparency = 0
 msg.TextStrokeColor3 = Color3.fromRGB(0,0,0)
 msg.TextTransparency = 1
 
+-- Fade in chữ
 TweenService:Create(msg, TweenInfo.new(1.2), {TextTransparency=0}):Play()
 
+-- Giữ intro 4s
 task.wait(4)
 
+-- Fade out tất cả
 TweenService:Create(logo, TweenInfo.new(1.2), {ImageTransparency=1}):Play()
 TweenService:Create(msg, TweenInfo.new(1.2), {TextTransparency=1}):Play()
 TweenService:Create(bg, TweenInfo.new(1.2), {BackgroundTransparency=1}):Play()
@@ -71,7 +79,7 @@ ImageButton.Parent = ScreenGui
 ImageButton.BackgroundColor3 = Color3.fromRGB(0,0,0)
 ImageButton.BorderSizePixel = 0
 ImageButton.Position = UDim2.new(0.1,0,0.15,0)
-ImageButton.Size = UDim2.new(0,40,0,40)
+ImageButton.Size = UDim2.new(0,50,0,50) -- to hơn để dễ nhìn
 ImageButton.Draggable = true
 ImageButton.Image = "http://www.roblox.com/asset/?id=77111304194141"
 
@@ -79,12 +87,12 @@ local UICorner = Instance.new("UICorner")
 UICorner.Parent = ImageButton
 UICorner.CornerRadius = UDim.new(1,10)
 
--- ✅ Sửa lỗi đóng/mở
+-- ✅ Sửa lỗi đóng/mở UI
 local vim = game:GetService("VirtualInputManager")
 ImageButton.MouseButton1Click:Connect(function()
-    vim:SendKeyEvent(true, Enum.KeyCode.End, false, game)  -- nhấn End
+    vim:SendKeyEvent(true, Enum.KeyCode.End, false, game)
     task.wait(0.05)
-    vim:SendKeyEvent(false, Enum.KeyCode.End, false, game) -- thả End
+    vim:SendKeyEvent(false, Enum.KeyCode.End, false, game)
 end)
 
 ------------------------------------------------------------
@@ -95,8 +103,8 @@ local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/
 local Window = Fluent:CreateWindow({
     Title="DUCZ HUB",
     SubTitle="by DUCZ",
-    TabWidth=157,
-    Size=UDim2.fromOffset(450,300),
+    TabWidth=200, -- rộng hơn để khớp với logo
+    Size=UDim2.fromOffset(550,400), -- tăng diện tích GUI
     Acrylic=true,
     Theme="Dark",
     MinimizeKey=Enum.KeyCode.End
@@ -113,7 +121,7 @@ local Tabs = {
 -- Tab 0: Thông Tin
 Tabs.Main0:AddButton({
     Title="Youtuber",
-    Description="Grai2",
+    Description="DUCZ",
     Callback=function()
         setclipboard("https://youtube.com/@grai2")
     end
@@ -167,86 +175,31 @@ Tabs.Main1:AddButton({
 Tabs.Main2:AddButton({
     Title="Quartz Kaitun Hub",
     Callback=function()
-       getgenv().Mode = "OneClick"
-getgenv().Setting = {
-    ["Team"] = "Pirates", -- Options "Pirates", "Marines"
-    ["FucusOnLevel"] = true,
-    ["Fruits"] = {  -- setting for fruits u want
-        ["Primary"] = { -- if current fruit is not in this list, eat/buy
-            "Dough-Dough",
-            "Dragon-Dragon",
-            "Buddha-Buddha",
-            -- u can configs add mores/remove and must end with , (comma symbol)
-        },
-        ["Normal"] = { -- it just a normal fruit list
-            "Flame-Flame",
-            "Light-Light",
-            "Magma-Magma",
-            -- u can configs add mores/remove and must end with , (comma symbol)
+        getgenv().Mode = "OneClick"
+        getgenv().Setting = {
+            ["Team"] = "Pirates",
+            ["FucusOnLevel"] = true,
+            ["Fruits"] = {
+                ["Primary"] = {"Dough-Dough","Dragon-Dragon","Buddha-Buddha"},
+                ["Normal"] = {"Flame-Flame","Light-Light","Magma-Magma"}
+            },
+            ["IdleCheck"] = 150
         }
-        -- run this for get all fruit name `local t={};for _,v in pairs(game.ReplicatedStorage.Remotes.CommF_:InvokeServer("GetFruits"))do table.insert(t,`"{v.Name}"`)end;setclipboard(table.concat(t, "\n"))`
-    },
-    ["IdleCheck"] = 150, -- every (x) seconds if not moving rejoin
-};
-loadstring(game:HttpGet("https://raw.githubusercontent.com/xQuartyx/QuartyzScript/main/Loader.lua"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/xQuartyx/QuartyzScript/main/Loader.lua"))()
     end
 })
 Tabs.Main2:AddButton({
     Title="Kaitun Hiru Hub",
     Callback=function()
-       _G.Quest = {
-    ['RGB Aura Haki'] = true,
-    ['Pull Lever'] = true,
-    ['Quest Dough Awaken'] = true
-}
-_G.Race = {
-    ['Select Race'] = {'Human','Fishman','Skypiea','Mink'},
-    ['Lock Race'] = true,
-    ['Evo Race V3'] = true
-}
-_G.Melee = {
-    ['Godhuman'] = true
-}
-_G.Sword = {
-    ['Saber'] = true,
-    ['Midnight Blade'] = true,
-    ['Shisui'] = true,
-    ['Saddi'] = true,
-    ['Wando'] = true,
-    ['Yama'] = true,
-    ['Koko'] = false,
-    ['Rengoku'] = true,
-    ['Canvander'] = true,
-    ['Buddy Sword'] = true,
-    ['Twin Hooks'] = true,
-    ['SpikeyTrident'] = true,
-    ['Hallow Scryte'] = true,
-    ['Dark Dagger'] = true,
-    ['Tushita'] = true,
-    ['True Triple Katana'] = true,
-    ['Cursed Dual Katana'] = true,
-    ['Shark Anchor'] = true
-}
-_G.Gun = {
-    ['Kabucha'] = true,
-    ['Acidum Rifle'] = true,
-    ['Soul Guitar'] = true,
-    ['Serpent Bow'] = true
-}
-_G.Fruit = {
-    ['Main Fruit'] = {'Kitsune-Kitsune','T-Rex-T-Rex','Mammoth-Mammoth'},
-    ['Select Fruit'] = {'Dark-Dark','Magma-Magma'}
-}
-_G.Mastery = {
-    ['Melee'] = true,
-    ['Sword'] = true,
-    ['Fruit'] = true
-}
-_G.Setting = {
-    ['FPS Booster'] = true,
-    ['Auto Close Ui'] = false
-}
-loadstring(game:HttpGet("https://raw.githubusercontent.com/NGUYENVUDUY1/Super/refs/heads/main/Kaitun.lua"))()
+        _G.Quest = {['RGB Aura Haki'] = true,['Pull Lever'] = true,['Quest Dough Awaken'] = true}
+        _G.Race = {['Select Race'] = {'Human','Fishman','Skypiea','Mink'},['Lock Race'] = true,['Evo Race V3'] = true}
+        _G.Melee = {['Godhuman'] = true}
+        _G.Sword = {['Saber'] = true,['Midnight Blade'] = true,['Shisui'] = true,['Saddi'] = true,['Wando'] = true,['Yama'] = true,['Koko'] = false,['Rengoku'] = true,['Canvander'] = true,['Buddy Sword'] = true,['Twin Hooks'] = true,['SpikeyTrident'] = true,['Hallow Scryte'] = true,['Dark Dagger'] = true,['Tushita'] = true,['True Triple Katana'] = true,['Cursed Dual Katana'] = true,['Shark Anchor'] = true}
+        _G.Gun = {['Kabucha'] = true,['Acidum Rifle'] = true,['Soul Guitar'] = true,['Serpent Bow'] = true}
+        _G.Fruit = {['Main Fruit'] = {'Kitsune-Kitsune','T-Rex-T-Rex','Mammoth-Mammoth'},['Select Fruit'] = {'Dark-Dark','Magma-Magma'}}
+        _G.Mastery = {['Melee'] = true,['Sword'] = true,['Fruit'] = true}
+        _G.Setting = {['FPS Booster'] = true,['Auto Close Ui'] = false}
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/NGUYENVUDUY1/Super/refs/heads/main/Kaitun.lua"))()
     end
 })
 Tabs.Main2:AddButton({
@@ -258,46 +211,20 @@ Tabs.Main2:AddButton({
 
 -- Tab 3: Script Farm Chest
 Tabs.Main3:AddButton({
-    Title="Blue Pray  Hub",
+    Title="Blue Pray Hub",
     Callback=function()
         getgenv().Setting = {
-    ["Team"] = "Pirates",
-    ["Chat"] = {},
-    ["Skip Race V4"] = true,
-    ["Misc"] = {
-        ["Enable Lock Bounty"] = false,
-        ["Lock Bounty"] = {0, 300000000},
-        ["Hide Health"] = {4500,5000},
-        ["Lock Camera"] = true,
-        ["Enable Cam Farm"] = false,
-        ["White Screen"] = false,
-        ["FPS Boost"] = false,
-        ["Bypass TP"] = true,
-        ["Random & Store Fruit"] = true
-    },
-    ["Item"] = {
-        ["Melee"] = {["Enable"] = true,
-            ["Z"] = {["Enable"] = true, ["Hold Time"] = 1},
-            ["X"] = {["Enable"] = true, ["Hold Time"] = 0},
-            ["C"] = {["Enable"] = true, ["Hold Time"] = 0}
-        },
-        ["Blox Fruit"] = {["Enable"] = false,
-            ["Z"] = {["Enable"] = true, ["Hold Time"] = 1.5},
-            ["X"] = {["Enable"] = true, ["Hold Time"] = 0},
-            ["C"] = {["Enable"] = true, ["Hold Time"] = 0},
-            ["V"] = {["Enable"] = true, ["Hold Time"] = 0},
-            ["F"] = {["Enable"] = true, ["Hold Time"] = 0}
-        },
-        ["Sword"] = {["Enable"] = true,
-            ["Z"] = {["Enable"] = true, ["Hold Time"] = 0.3},
-            ["X"] = {["Enable"] = true, ["Hold Time"] = 0.2}
-        },
-        ["Gun"] = {["Enable"] = false,
-            ["Z"] = {["Enable"] = true, ["Hold Time"] = 0.5},
-            ["X"] = {["Enable"] = true, ["Hold Time"] = 0.3}
+            ["Team"] = "Pirates",
+            ["Chat"] = {},
+            ["Skip Race V4"] = true,
+            ["Misc"] = {["Enable Lock Bounty"] = false,["Lock Bounty"] = {0, 300000000},["Hide Health"] = {4500,5000},["Lock Camera"] = true,["Enable Cam Farm"] = false,["White Screen"] = false,["FPS Boost"] = false,["Bypass TP"] = true,["Random & Store Fruit"] = true},
+            ["Item"] = {
+                ["Melee"] = {["Enable"] = true, ["Z"] = {["Enable"] = true, ["Hold Time"] = 1}, ["X"] = {["Enable"] = true, ["Hold Time"] = 0}, ["C"] = {["Enable"] = true, ["Hold Time"] = 0}},
+                ["Blox Fruit"] = {["Enable"] = false, ["Z"] = {["Enable"] = true, ["Hold Time"] = 1.5}, ["X"] = {["Enable"] = true, ["Hold Time"] = 0}, ["C"] = {["Enable"] = true, ["Hold Time"] = 0}, ["V"] = {["Enable"] = true, ["Hold Time"] = 0}, ["F"] = {["Enable"] = true, ["Hold Time"] = 0}},
+                ["Sword"] = {["Enable"] = true, ["Z"] = {["Enable"] = true, ["Hold Time"] = 0.3}, ["X"] = {["Enable"] = true, ["Hold Time"] = 0.2}},
+                ["Gun"] = {["Enable"] = false, ["Z"] = {["Enable"] = true, ["Hold Time"] = 0.5}, ["X"] = {["Enable"] = true, ["Hold Time"] = 0.3}}
+            }
         }
-    }
-}
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Ghost-1198/AutoBounty/main/AutoBounty.lua"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Ghost-1198/AutoBounty/main/AutoBounty.lua"))()
     end
 })
