@@ -42,7 +42,7 @@ msg.AnchorPoint = Vector2.new(0.5,0)
 msg.Position = UDim2.new(0.5,0,0.75,0)
 msg.Size = UDim2.new(0,600,0,80)
 msg.BackgroundTransparency = 1
-msg.Text = "Grai Hub"
+msg.Text = "DUCZ HUB Hub"
 msg.TextColor3 = Color3.fromRGB(0,255,255)
 msg.Font = Enum.Font.GothamBlack
 msg.TextScaled = true
@@ -107,7 +107,7 @@ local Tabs = {
     Main0=Window:AddTab({Title="Thông Tin"}),
     Main1=Window:AddTab({Title="Script Main"}),
     Main2=Window:AddTab({Title="Script Kaitun"}),
-    Main3=Window:AddTab({Title="Script Farm Chest"})
+    Main3=Window:AddTab({Title="Script Auto Bounty"})
 }
 
 -- Tab 0: Thông Tin
@@ -158,7 +158,7 @@ Tabs.Main1:AddButton({
     end
 })
 Tabs.Main1:AddButton({
-    Title="BlueX HUb",
+    Title="Blue X Hub",
     Callback=function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-BlueX/BlueX-Hub/refs/heads/main/Main.lua"))()
     end
@@ -176,7 +176,7 @@ Tabs.Main1:AddButton({
     end
 })
 Tabs.Main1:AddButton({
-    Title="HOHO Hub",
+    Title="Hoho Hub",
     Callback=function()
         loadstring(game:HttpGet('https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI'))()
     end
@@ -184,47 +184,139 @@ Tabs.Main1:AddButton({
 
 -- Tab 2: Script Kaitun
 Tabs.Main2:AddButton({
-    Title="Nat Hub",
+    Title="Quartz Kaitun Hub",
     Callback=function()
-        loadstring(game:HttpGet("https://get.nathub.xyz/loader"))()
+       getgenv().Mode = "OneClick"
+getgenv().Setting = {
+    ["Team"] = "Pirates", -- Options "Pirates", "Marines"
+    ["FucusOnLevel"] = true,
+    ["Fruits"] = {  -- setting for fruits u want
+        ["Primary"] = { -- if current fruit is not in this list, eat/buy
+            "Dough-Dough",
+            "Dragon-Dragon",
+            "Buddha-Buddha",
+            -- u can configs add mores/remove and must end with , (comma symbol)
+        },
+        ["Normal"] = { -- it just a normal fruit list
+            "Flame-Flame",
+            "Light-Light",
+            "Magma-Magma",
+            -- u can configs add mores/remove and must end with , (comma symbol)
+        }
+        -- run this for get all fruit name `local t={};for _,v in pairs(game.ReplicatedStorage.Remotes.CommF_:InvokeServer("GetFruits"))do table.insert(t,`"{v.Name}"`)end;setclipboard(table.concat(t, "\n"))`
+    },
+    ["IdleCheck"] = 150, -- every (x) seconds if not moving rejoin
+};
+loadstring(game:HttpGet("https://raw.githubusercontent.com/xQuartyx/QuartyzScript/main/Loader.lua"))()
     end
 })
 Tabs.Main2:AddButton({
-    Title="Speed Hub X",
+    Title="Kaitun Hiru Hub",
     Callback=function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua", true))()
+       _G.Quest = {
+    ['RGB Aura Haki'] = true,
+    ['Pull Lever'] = true,
+    ['Quest Dough Awaken'] = true
+}
+_G.Race = {
+    ['Select Race'] = {'Human','Fishman','Skypiea','Mink'},
+    ['Lock Race'] = true,
+    ['Evo Race V3'] = true
+}
+_G.Melee = {
+    ['Godhuman'] = true
+}
+_G.Sword = {
+    ['Saber'] = true,
+    ['Midnight Blade'] = true,
+    ['Shisui'] = true,
+    ['Saddi'] = true,
+    ['Wando'] = true,
+    ['Yama'] = true,
+    ['Koko'] = false,
+    ['Rengoku'] = true,
+    ['Canvander'] = true,
+    ['Buddy Sword'] = true,
+    ['Twin Hooks'] = true,
+    ['SpikeyTrident'] = true,
+    ['Hallow Scryte'] = true,
+    ['Dark Dagger'] = true,
+    ['Tushita'] = true,
+    ['True Triple Katana'] = true,
+    ['Cursed Dual Katana'] = true,
+    ['Shark Anchor'] = true
+}
+_G.Gun = {
+    ['Kabucha'] = true,
+    ['Acidum Rifle'] = true,
+    ['Soul Guitar'] = true,
+    ['Serpent Bow'] = true
+}
+_G.Fruit = {
+    ['Main Fruit'] = {'Kitsune-Kitsune','T-Rex-T-Rex','Mammoth-Mammoth'},
+    ['Select Fruit'] = {'Dark-Dark','Magma-Magma'}
+}
+_G.Mastery = {
+    ['Melee'] = true,
+    ['Sword'] = true,
+    ['Fruit'] = true
+}
+_G.Setting = {
+    ['FPS Booster'] = true,
+    ['Auto Close Ui'] = false
+}
+loadstring(game:HttpGet("https://raw.githubusercontent.com/NGUYENVUDUY1/Super/refs/heads/main/Kaitun.lua"))()
     end
 })
 Tabs.Main2:AddButton({
-    Title="No Lag Hub",
+    Title="Tsuo Kaitun Hub",
     Callback=function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/NoLag-id/No-Lag-HUB/refs/heads/main/Loader/Main.lua"))()
-    end
-})
-Tabs.Main2:AddButton({
-    Title="BlueX Hub",
-    Callback=function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-BlueX/BlueX-Hub/refs/heads/main/Main.lua"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Tsuo7/TsuoHub/main/TsuohubKaitun"))()
     end
 })
 
 -- Tab 3: Script Farm Chest
 Tabs.Main3:AddButton({
-    Title="Voidware Hub",
+    Title="Blue Pray  Hub",
     Callback=function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/VapeVoidware/VW-Add/main/nightsintheforest.lua", true))()
+        getgenv().Setting = {
+    ["Team"] = "Pirates",
+    ["Chat"] = {},
+    ["Skip Race V4"] = true,
+    ["Misc"] = {
+        ["Enable Lock Bounty"] = false,
+        ["Lock Bounty"] = {0, 300000000},
+        ["Hide Health"] = {4500,5000},
+        ["Lock Camera"] = true,
+        ["Enable Cam Farm"] = false,
+        ["White Screen"] = false,
+        ["FPS Boost"] = false,
+        ["Bypass TP"] = true,
+        ["Random & Store Fruit"] = true
+    },
+    ["Item"] = {
+        ["Melee"] = {["Enable"] = true,
+            ["Z"] = {["Enable"] = true, ["Hold Time"] = 1},
+            ["X"] = {["Enable"] = true, ["Hold Time"] = 0},
+            ["C"] = {["Enable"] = true, ["Hold Time"] = 0}
+        },
+        ["Blox Fruit"] = {["Enable"] = false,
+            ["Z"] = {["Enable"] = true, ["Hold Time"] = 1.5},
+            ["X"] = {["Enable"] = true, ["Hold Time"] = 0},
+            ["C"] = {["Enable"] = true, ["Hold Time"] = 0},
+            ["V"] = {["Enable"] = true, ["Hold Time"] = 0},
+            ["F"] = {["Enable"] = true, ["Hold Time"] = 0}
+        },
+        ["Sword"] = {["Enable"] = true,
+            ["Z"] = {["Enable"] = true, ["Hold Time"] = 0.3},
+            ["X"] = {["Enable"] = true, ["Hold Time"] = 0.2}
+        },
+        ["Gun"] = {["Enable"] = false,
+            ["Z"] = {["Enable"] = true, ["Hold Time"] = 0.5},
+            ["X"] = {["Enable"] = true, ["Hold Time"] = 0.3}
+        }
+    }
+}
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Ghost-1198/AutoBounty/main/AutoBounty.lua"))()
     end
 })
-Tabs.Main3:AddButton({
-    Title="Speed Hub X",
-    Callback=function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua", true))()
-    end
-})
-Tabs.Main3:AddButton({
-    Title="Pulse HUb",
-    Callback=function()
-       loadstring(game:HttpGet("https://raw.githubusercontent.com/Chavels123/Loader/refs/heads/main/loader.lua"))()
-    end
-})
-
