@@ -116,6 +116,7 @@ local Tabs = {
     Main1=Window:AddTab({Title="Script Main"}),
     Main2=Window:AddTab({Title="Script Kaitun"}),
     Main3=Window:AddTab({Title="Script Auto Bounty"})
+    Main4=Window:AddTab({Title="Script Hop Sever"})
 }
 
 -- Tab 0: Thông Tin
@@ -335,5 +336,19 @@ Tabs.Main1:AddButton({
     Callback=function()
         getgenv().Team = "Pirates" --Marines, Pirates
 loadstring(game:HttpGet('https://raw.githubusercontent.com/asher-realrise/project/refs/heads/main/loadder.lua'))()
+    end
+})
+Tabs.Main1:AddButton({
+    Title="Hiru Hub",
+    Callback=function()
+        repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
+loadstring(game:HttpGet("https://luacrack.site/raw.php/HiruHub/raw/Loader/HiruHubFree.lua"))()
+    end
+})
+Tabs.Main4:AddButton({
+    Title="Teddy Hop Sever Hub(key:teddyhubfreemium",
+    Callback=function()
+       repeat task.wait() until game:IsLoaded() and game:GetService("Players") and game.Players.LocalPlayer and game.Players.LocalPlayer:FindFirstChild("PlayerGui")
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Teddyseetink/Haidepzai/refs/heads/main/TEDDYHUB-FREEMIUM"))()
     end
 })
