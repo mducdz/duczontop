@@ -13,7 +13,7 @@ gui.Parent = player:WaitForChild("PlayerGui")
 local bg = Instance.new("Frame")
 bg.Size = UDim2.new(1,0,1,0)
 bg.BackgroundColor3 = Color3.fromRGB(0,0,0)
-bg.BackgroundTransparency = 0.2 -- giảm trong suốt 1 chút
+bg.BackgroundTransparency = 0.2
 bg.Parent = gui
 
 -- Logo
@@ -21,18 +21,16 @@ local logo = Instance.new("ImageLabel")
 logo.Parent = gui
 logo.AnchorPoint = Vector2.new(0.5,0.5)
 logo.Position = UDim2.new(0.5,0,0.5,0)
-logo.Size = UDim2.new(0,0,0,0) -- bắt đầu nhỏ
+logo.Size = UDim2.new(0,0,0,0)
 logo.BackgroundTransparency = 1
 logo.Image = "http://www.roblox.com/asset/?id=77111304194141"
 logo.ImageTransparency = 1
 
--- Zoom + fade in
 TweenService:Create(logo, TweenInfo.new(1.5, Enum.EasingStyle.Elastic, Enum.EasingDirection.Out), {
-    Size = UDim2.new(0,400,0,400), -- tăng kích thước logo
+    Size = UDim2.new(0,400,0,400),
     ImageTransparency = 0
 }):Play()
 
--- Xoay logo
 task.spawn(function()
     while logo.Parent do
         logo.Rotation += 0.5
@@ -40,12 +38,12 @@ task.spawn(function()
     end
 end)
 
--- Chữ dưới logo
+-- Chữ
 local msg = Instance.new("TextLabel")
 msg.Parent = gui
 msg.AnchorPoint = Vector2.new(0.5,0)
 msg.Position = UDim2.new(0.5,0,0.8,0)
-msg.Size = UDim2.new(0,800,0,100) -- chữ to hơn
+msg.Size = UDim2.new(0,800,0,100)
 msg.BackgroundTransparency = 1
 msg.Text = "DUCZ Hub"
 msg.TextColor3 = Color3.fromRGB(0,255,255)
@@ -55,13 +53,10 @@ msg.TextStrokeTransparency = 0
 msg.TextStrokeColor3 = Color3.fromRGB(0,0,0)
 msg.TextTransparency = 1
 
--- Fade in chữ
 TweenService:Create(msg, TweenInfo.new(1.2), {TextTransparency=0}):Play()
 
--- Giữ intro 4s
 task.wait(4)
 
--- Fade out tất cả
 TweenService:Create(logo, TweenInfo.new(1.2), {ImageTransparency=1}):Play()
 TweenService:Create(msg, TweenInfo.new(1.2), {TextTransparency=1}):Play()
 TweenService:Create(bg, TweenInfo.new(1.2), {BackgroundTransparency=1}):Play()
@@ -71,7 +66,7 @@ gui:Destroy()
 ------------------------------------------------------------
 -- 🎛 MAIN UI BUTTON
 local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Parent = game.CoreGui
+ScreenGui.Parent = player:WaitForChild("PlayerGui")
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 local ImageButton = Instance.new("ImageButton")
@@ -79,15 +74,14 @@ ImageButton.Parent = ScreenGui
 ImageButton.BackgroundColor3 = Color3.fromRGB(0,0,0)
 ImageButton.BorderSizePixel = 0
 ImageButton.Position = UDim2.new(0.1,0,0.15,0)
-ImageButton.Size = UDim2.new(0,50,0,50) -- to hơn để dễ nhìn
-ImageButton.Draggable = true
+ImageButton.Size = UDim2.new(0,50,0,50)
 ImageButton.Image = "http://www.roblox.com/asset/?id=77111304194141"
 
 local UICorner = Instance.new("UICorner")
-UICorner.Parent = ImageButton
 UICorner.CornerRadius = UDim.new(1,10)
+UICorner.Parent = ImageButton
 
--- ✅ Sửa lỗi đóng/mở UI
+-- Toggle UI
 local vim = game:GetService("VirtualInputManager")
 ImageButton.MouseButton1Click:Connect(function()
     vim:SendKeyEvent(true, Enum.KeyCode.End, false, game)
@@ -98,28 +92,32 @@ end)
 ------------------------------------------------------------
 -- 📦 LOAD FLUENT
 repeat task.wait() until game:IsLoaded()
-local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+
+local Fluent = loadstring(game:HttpGet(
+    "https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"
+))()
 
 local Window = Fluent:CreateWindow({
     Title="DUCZ HUB",
     SubTitle="by DUCZ",
-    TabWidth=200, -- rộng hơn để khớp với logo
-    Size=UDim2.fromOffset(550,400), -- tăng diện tích GUI
+    TabWidth=200,
+    Size=UDim2.fromOffset(550,400),
     Acrylic=true,
     Theme="Dark",
     MinimizeKey=Enum.KeyCode.End
 })
 
--- Tabs
+-- Tabs (🔥 FIX LỖI THIẾU DẤU PHẨY)
 local Tabs = {
-    Main0=Window:AddTab({Title="Thông Tin"}),
-    Main1=Window:AddTab({Title="Script Main"}),
-    Main2=Window:AddTab({Title="Script Kaitun"}),
-    Main3=Window:AddTab({Title="Script Auto Bounty"})
-    Main4=Window:AddTab({Title="Script Hop Sever"})
+    Main0 = Window:AddTab({Title="Thông Tin"}),
+    Main1 = Window:AddTab({Title="Script Main"}),
+    Main2 = Window:AddTab({Title="Script Kaitun"}),
+    Main3 = Window:AddTab({Title="Script Auto Bounty"}),
+    Main4 = Window:AddTab({Title="Script Hop Sever"})
 }
 
--- Tab 0: Thông Tin
+------------------------------------------------------------
+-- Tab 0
 Tabs.Main0:AddButton({
     Title="Youtuber",
     Description="DUCZ",
@@ -128,6 +126,7 @@ Tabs.Main0:AddButton({
     end
 })
 
+------------------------------------------------------------
 -- Tab 1: Script Main
 Tabs.Main1:AddButton({
     Title="w-azure Hub",
@@ -135,220 +134,24 @@ Tabs.Main1:AddButton({
         loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/85e904ae1ff30824c1aa007fc7324f8f.lua"))()
     end
 })
+
 Tabs.Main1:AddButton({
     Title="Min Hub",
     Callback=function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaCrack/Min/refs/heads/main/MinXt2Eng"))()
     end
 })
+
 Tabs.Main1:AddButton({
     Title="Speed Hub X",
     Callback=function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua", true))()
     end
 })
+
 Tabs.Main1:AddButton({
     Title="Blue X Hub",
     Callback=function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-BlueX/BlueX-Hub/refs/heads/main/Main.lua"))()
-    end
-})
-Tabs.Main1:AddButton({
-    Title="Tsoul Hub",
-    Callback=function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Tsuo7/TsuoHub/main/Tsuoscripts"))()
-    end
-})
-Tabs.Main1:AddButton({
-    Title="Volcano Hub V3",
-    Callback=function()
-        loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/indexeduu/BF-NewVer/refs/heads/main/V3New.lua"))()
-    end
-})
-Tabs.Main1:AddButton({
-    Title="Hoho Hub",
-    Callback=function()
-        loadstring(game:HttpGet('https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI'))()
-    end
-})
-
--- Tab 2: Script Kaitun
-Tabs.Main2:AddButton({
-    Title="Quartz Kaitun Hub",
-    Callback=function()
-        getgenv().Mode = "OneClick"
-        getgenv().Setting = {
-            ["Team"] = "Pirates",
-            ["FucusOnLevel"] = true,
-            ["Fruits"] = {
-                ["Primary"] = {"Dough-Dough","Dragon-Dragon","Buddha-Buddha"},
-                ["Normal"] = {"Flame-Flame","Light-Light","Magma-Magma"}
-            },
-            ["IdleCheck"] = 150
-        }
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/xQuartyx/QuartyzScript/main/Loader.lua"))()
-    end
-})
-Tabs.Main2:AddButton({
-    Title="Kaitun Hiru Hub",
-    Callback=function()
-        _G.Quest = {['RGB Aura Haki'] = true,['Pull Lever'] = true,['Quest Dough Awaken'] = true}
-        _G.Race = {['Select Race'] = {'Human','Fishman','Skypiea','Mink'},['Lock Race'] = true,['Evo Race V3'] = true}
-        _G.Melee = {['Godhuman'] = true}
-        _G.Sword = {['Saber'] = true,['Midnight Blade'] = true,['Shisui'] = true,['Saddi'] = true,['Wando'] = true,['Yama'] = true,['Koko'] = false,['Rengoku'] = true,['Canvander'] = true,['Buddy Sword'] = true,['Twin Hooks'] = true,['SpikeyTrident'] = true,['Hallow Scryte'] = true,['Dark Dagger'] = true,['Tushita'] = true,['True Triple Katana'] = true,['Cursed Dual Katana'] = true,['Shark Anchor'] = true}
-        _G.Gun = {['Kabucha'] = true,['Acidum Rifle'] = true,['Soul Guitar'] = true,['Serpent Bow'] = true}
-        _G.Fruit = {['Main Fruit'] = {'Kitsune-Kitsune','T-Rex-T-Rex','Mammoth-Mammoth'},['Select Fruit'] = {'Dark-Dark','Magma-Magma'}}
-        _G.Mastery = {['Melee'] = true,['Sword'] = true,['Fruit'] = true}
-        _G.Setting = {['FPS Booster'] = true,['Auto Close Ui'] = false}
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/NGUYENVUDUY1/Super/refs/heads/main/Kaitun.lua"))()
-    end
-})
-Tabs.Main2:AddButton({
-    Title="Tsuo Kaitun Hub",
-    Callback=function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Tsuo7/TsuoHub/main/TsuohubKaitun"))()
-    end
-})
-
--- Tab 3: Script Farm Chest
-Tabs.Main3:AddButton({
-    Title="Blue Pray Hub",
-    Callback=function()
-        getgenv().Setting = {
-            ["Team"] = "Pirates",
-            ["Chat"] = {},
-            ["Skip Race V4"] = true,
-            ["Misc"] = {["Enable Lock Bounty"] = false,["Lock Bounty"] = {0, 300000000},["Hide Health"] = {4500,5000},["Lock Camera"] = true,["Enable Cam Farm"] = false,["White Screen"] = false,["FPS Boost"] = false,["Bypass TP"] = true,["Random & Store Fruit"] = true},
-            ["Item"] = {
-                ["Melee"] = {["Enable"] = true, ["Z"] = {["Enable"] = true, ["Hold Time"] = 1}, ["X"] = {["Enable"] = true, ["Hold Time"] = 0}, ["C"] = {["Enable"] = true, ["Hold Time"] = 0}},
-                ["Blox Fruit"] = {["Enable"] = false, ["Z"] = {["Enable"] = true, ["Hold Time"] = 1.5}, ["X"] = {["Enable"] = true, ["Hold Time"] = 0}, ["C"] = {["Enable"] = true, ["Hold Time"] = 0}, ["V"] = {["Enable"] = true, ["Hold Time"] = 0}, ["F"] = {["Enable"] = true, ["Hold Time"] = 0}},
-                ["Sword"] = {["Enable"] = true, ["Z"] = {["Enable"] = true, ["Hold Time"] = 0.3}, ["X"] = {["Enable"] = true, ["Hold Time"] = 0.2}},
-                ["Gun"] = {["Enable"] = false, ["Z"] = {["Enable"] = true, ["Hold Time"] = 0.5}, ["X"] = {["Enable"] = true, ["Hold Time"] = 0.3}}
-            }
-        }
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Ghost-1198/AutoBounty/main/AutoBounty.lua"))()
-    end
-})
-Tabs.Main1:AddButton({
-    Title="Quantum Hub",
-    Callback=function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/flazhy/QuantumOnyx/refs/heads/main/QuantumOnyx.lua"))()
-    end
-})
-Tabs.Main1:AddButton({
-    Title="Zinner Hub",
-    Callback=function()
-        getgenv().Team = "Pirates"
-loadstring(game:HttpGet("https://raw.githubusercontent.com/HoangNguyenk8/Roblox/refs/heads/main/BF-Main.luau"))()
-    end
-})
-Tabs.Main1:AddButton({
-    Title="Vxeze Hub",
-    Callback=function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Dex-Bear/Vxezehub/refs/heads/main/VxezeHubMain"))()
-    end
-})
-Tabs.Main1:AddButton({
-    Title="Lion Hub",
-    Callback=function()
-        repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
-getgenv().team = "Pirates" -- Marines
-loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/e0c7fcf6c077fc23475cf4ce4db58e42.lua"))()
-    end
-})
-Tabs.Main1:AddButton({
-    Title="Xero Hub",
-    Callback=function()
-        getgenv().Team = "Marines"
-getgenv().Hide_Menu = false
-getgenv().Auto_Execute = false
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Xero2409/XeroHub/refs/heads/main/main.lua"))()
-    end
-})
-Tabs.Main1:AddButton({
-    Title="Hinishi Hub",
-    Callback=function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-Hinishi/Hinishi-Hub/refs/heads/main/BetaVersion.lua"))()
-    end
-})
-Tabs.Main2:AddButton({
-    Title="Lonely Kaitun Hub",
-    Callback=function()
-       getgenv().SettingFarm = {
-    ["Hide UI"] = false,
-    ["White Screen"] = false,
-    ["Black Screen"] = false,
-    ["Lock Fps"] = {
-        ["Enabled"] = false,
-        ["FPS"] = 20
-    },
-    ["Auto Chat"] = {
-        ["Enabled"] = false,
-        ["Text"] = "Lonely Hub On Top" -- or {"msg 1", "msg2", "msg3"}
-    },
-    ["Quest"] = {
-        ["Evo Race V1"] = true,
-        ["Evo Race V2"] = true,
-        ["RGB Haki"] = true,
-        ["Pull Lerver"] = true
-    },
-    ["Sword"] = {
-        ["Dual-Headed Blade"] = true,
-        ["Smoke Admiral"] = true,
-        ["Wardens Sword"] = true,
-        ["Cutlass"] = true,
-        ["Katana"] = true,
-        ["Dual Katana"] = true,
-        ["Triple Katana"] = true,
-        ["Iron Mace"] = true,
-        ["Saber"] = true,
-        ["Pole (1st Form)"] = true,
-        ["Gravity Blade"] = true,
-        ["Longsword"] = true,
-        ["Rengoku"] = true,
-        ["Midnight Blade"] = true,
-        ["Soul Cane"] = true,
-        ["Bisento"] = true,
-        ["Yama"] = true,
-        ["Tushita"] = true,
-        ["Cursed Dual Katana"] = true
-    },
-    ["Gun"] = {
-        ["Soul Guitar"] = true,
-        ["Kabucha"] = true,
-        ["Venom Bow"] = true,
-        ["Musket"] = true,
-        ["Flintlock"] = true,
-        ["Refined Slingshot"] = true,
-        ["Magma Blaster"] = true,
-        ["Dual Flintlock"] = true,
-        ["Cannon"] = true,
-        ["Bizarre Revolver"] = true,
-        ["Bazooka"] = true
-    },
-    ["FPS Booster"] = true
-}
-loadstring(game:HttpGet("https://raw.githubusercontent.com/LongHip12/LonelyHub/refs/heads/main/LonelyHub-KaitunBF.lua"))() 
-    end
-})
-Tabs.Main1:AddButton({
-    Title="Rise Hub",
-    Callback=function()
-        getgenv().Team = "Pirates" --Marines, Pirates
-loadstring(game:HttpGet('https://raw.githubusercontent.com/asher-realrise/project/refs/heads/main/loadder.lua'))()
-    end
-})
-Tabs.Main1:AddButton({
-    Title="Hiru Hub",
-    Callback=function()
-        repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
-loadstring(game:HttpGet("https://luacrack.site/raw.php/HiruHub/raw/Loader/HiruHubFree.lua"))()
-    end
-})
-Tabs.Main4:AddButton({
-    Title="Teddy Hop Sever Hub(key:teddyhubfreemium",
-    Callback=function()
-       repeat task.wait() until game:IsLoaded() and game:GetService("Players") and game.Players.LocalPlayer and game.Players.LocalPlayer:FindFirstChild("PlayerGui")
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Teddyseetink/Haidepzai/refs/heads/main/TEDDYHUB-FREEMIUM"))()
     end
 })
