@@ -228,3 +228,45 @@ Tabs.Main3:AddButton({
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Ghost-1198/AutoBounty/main/AutoBounty.lua"))()
     end
 })
+Tabs.Main1:AddButton({
+    Title="Quantum Hub",
+    Callback=function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/flazhy/QuantumOnyx/refs/heads/main/QuantumOnyx.lua"))()
+    end
+})
+Tabs.Main1:AddButton({
+    Title="Zinner Hub",
+    Callback=function()
+        getgenv().Team = "Pirates"
+loadstring(game:HttpGet("https://raw.githubusercontent.com/HoangNguyenk8/Roblox/refs/heads/main/BF-Main.luau"))()
+    end
+})
+Tabs.Main1:AddButton({
+    Title="Vxeze Hub",
+    Callback=function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Dex-Bear/Vxezehub/refs/heads/main/VxezeHubMain"))()
+    end
+})
+Tabs.Main1:AddButton({
+    Title="Lion Hub",
+    Callback=function()
+        repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
+getgenv().team = "Pirates" -- Marines
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/e0c7fcf6c077fc23475cf4ce4db58e42.lua"))()
+    end
+})
+Tabs.Main1:AddButton({
+    Title="Xero Hub",
+    Callback=function()
+        getgenv().Team = "Marines"
+getgenv().Hide_Menu = false
+getgenv().Auto_Execute = false
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Xero2409/XeroHub/refs/heads/main/main.lua"))()
+    end
+})
+Tabs.Main1:AddButton({
+    Title="Hinishi Hub",
+    Callback=function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-Hinishi/Hinishi-Hub/refs/heads/main/BetaVersion.lua"))()
+    end
+})
