@@ -270,3 +270,70 @@ Tabs.Main1:AddButton({
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-Hinishi/Hinishi-Hub/refs/heads/main/BetaVersion.lua"))()
     end
 })
+Tabs.Main2:AddButton({
+    Title="Lonely Kaitun Hub",
+    Callback=function()
+       getgenv().SettingFarm = {
+    ["Hide UI"] = false,
+    ["White Screen"] = false,
+    ["Black Screen"] = false,
+    ["Lock Fps"] = {
+        ["Enabled"] = false,
+        ["FPS"] = 20
+    },
+    ["Auto Chat"] = {
+        ["Enabled"] = false,
+        ["Text"] = "Lonely Hub On Top" -- or {"msg 1", "msg2", "msg3"}
+    },
+    ["Quest"] = {
+        ["Evo Race V1"] = true,
+        ["Evo Race V2"] = true,
+        ["RGB Haki"] = true,
+        ["Pull Lerver"] = true
+    },
+    ["Sword"] = {
+        ["Dual-Headed Blade"] = true,
+        ["Smoke Admiral"] = true,
+        ["Wardens Sword"] = true,
+        ["Cutlass"] = true,
+        ["Katana"] = true,
+        ["Dual Katana"] = true,
+        ["Triple Katana"] = true,
+        ["Iron Mace"] = true,
+        ["Saber"] = true,
+        ["Pole (1st Form)"] = true,
+        ["Gravity Blade"] = true,
+        ["Longsword"] = true,
+        ["Rengoku"] = true,
+        ["Midnight Blade"] = true,
+        ["Soul Cane"] = true,
+        ["Bisento"] = true,
+        ["Yama"] = true,
+        ["Tushita"] = true,
+        ["Cursed Dual Katana"] = true
+    },
+    ["Gun"] = {
+        ["Soul Guitar"] = true,
+        ["Kabucha"] = true,
+        ["Venom Bow"] = true,
+        ["Musket"] = true,
+        ["Flintlock"] = true,
+        ["Refined Slingshot"] = true,
+        ["Magma Blaster"] = true,
+        ["Dual Flintlock"] = true,
+        ["Cannon"] = true,
+        ["Bizarre Revolver"] = true,
+        ["Bazooka"] = true
+    },
+    ["FPS Booster"] = true
+}
+loadstring(game:HttpGet("https://raw.githubusercontent.com/LongHip12/LonelyHub/refs/heads/main/LonelyHub-KaitunBF.lua"))() 
+    end
+})
+Tabs.Main1:AddButton({
+    Title="Rise Hub",
+    Callback=function()
+        getgenv().Team = "Pirates" --Marines, Pirates
+loadstring(game:HttpGet('https://raw.githubusercontent.com/asher-realrise/project/refs/heads/main/loadder.lua'))()
+    end
+})
